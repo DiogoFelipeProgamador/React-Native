@@ -17,4 +17,12 @@ public class UserService {
     public User saveUser(User user){
         return userRepository.save(user);
     }
+
+    public User login(User user){
+    System.out.println("Payload recebido: " + user.getUsername() + " / " + user.getPassword());
+    return userRepository.findByUsername(user.getUsername())
+        .filter(u -> u.getPassword().trim().equals(user.getPassword().trim()))
+        .orElse(null);
+}
+
 }
